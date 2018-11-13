@@ -7,11 +7,10 @@ view: ads_insights_actions_base_fb_adapter {
   dimension: primary_key {
     hidden: yes
     primary_key: yes
-    sql: concat(CAST(${_date} as STRING)
-      , "|", ${ad_id}
-      , "|", ${action_type}
-      , "|", ${breakdown}
-    ) ;;
+    sql: TO_CHAR(${_date})
+      || '|' ||  ${ad_id}
+      || '|' ||  ${action_type}
+      || '|' ||  ${breakdown} ;;
   }
 
   dimension: _1_d_view {
@@ -60,6 +59,6 @@ view: ads_insights_actions_base_fb_adapter {
   dimension: offsite_conversion_value {
     hidden: yes
     type: number
-    sql: if(${action_type} = "offsite_conversion", ${value}, null) ;;
+    sql: iff(${action_type} = 'offsite_conversion', ${value}, null) ;;
   }
 }

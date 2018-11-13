@@ -1,6 +1,6 @@
 # Facebook Ads
 
-LookML files for a schema mapping on BigQuery for Facebook Ads compatible with [Fivetran's Ads Insights ETL](https://fivetran.com/docs/applications/facebook-ads-insights). This is designed to work with a ETL agnostic [Facebook Ads block](https://github.com/looker/app-marketing-facebook-ads).
+LookML files for a schema mapping on Snowflake for Facebook Ads compatible with [Fivetran's Ads Insights ETL](https://fivetran.com/docs/applications/facebook-ads-insights). This is designed to work with a ETL agnostic [Facebook Ads block](https://github.com/looker/app-marketing-facebook-ads).
 
 ## To use this block, you will need to:
 
@@ -29,7 +29,7 @@ manifest.lkml
 ```LookML
 
 remote_dependency: app-marketing-facebook-ads-adapter {
-  url: "git://github.com/looker/app-marketing-facebook-ads-fivetran-bigquery"
+  url: "git://github.com/looker/app-marketing-facebook-ads-fivetran-snowflake"
   ref: "16795ca4726f79f808d274a4765781c72c974d4b"
 }
 
@@ -38,7 +38,7 @@ remote_dependency: app-marketing-facebook-ads {
   ref: "5a7d003d98be5b5adc93d7fd90bdd4105461186a"
 }```
 
-Note that the `ref:` should point to the latest commit in each respective repo [facebook-ads-fivetran-bigquery](https://github.com/looker/app-marketing-facebook-ads-fivetran-bigquery/commits/master) and [facebook-ads](https://github.com/looker/app-marketing-facebook-ads/commits/master).
+Note that the `ref:` should point to the latest commit in each respective repo [facebook-ads-fivetran-snowflake](https://github.com/looker/app-marketing-facebook-ads-fivetran-snowflake/commits/master) and [facebook-ads](https://github.com/looker/app-marketing-facebook-ads/commits/master).
 
 2. Create a `facebook_ads_config` view that is assumed by this project. This configuration requires a  file
 
