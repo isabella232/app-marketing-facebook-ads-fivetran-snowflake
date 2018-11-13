@@ -46,7 +46,7 @@ view: ad_fb_adapter {
 
   dimension: id {
     hidden: yes
-    sql: CAST(${TABLE}.id AS STRING) ;;
+    sql: TO_CHAR(${TABLE}.id) ;;
   }
 
   dimension: account_id {
@@ -115,7 +115,7 @@ view: ad_fb_adapter {
   dimension: status_active {
     hidden: yes
     type: yesno
-    sql: ${effective_status} = "ACTIVE" ;;
+    sql: ${effective_status} = 'ACTIVE' ;;
   }
 
   dimension: name {

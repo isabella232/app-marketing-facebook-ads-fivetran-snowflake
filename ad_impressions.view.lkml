@@ -63,12 +63,12 @@ view: date_base_fb_adapter {
   dimension: _date {
     hidden: yes
     type: date_raw
-    sql: CAST(${TABLE}.date AS DATE) ;;
+    sql: TO_DATE(${TABLE}.date) ;;
   }
 
   dimension: breakdown {
     hidden: yes
-    sql: "1" ;;
+    sql: '1' ;;
   }
 }
 
@@ -86,13 +86,12 @@ view: ad_impressions_fb_adapter {
   dimension: primary_key {
     hidden: yes
     primary_key: yes
-    sql: concat(${_date}
-      , "|", ${account_id}
-      , "|", ${campaign_id}
-      , "|", ${adset_id}
-      , "|", ${ad_id}
-      , "|", ${breakdown}
-    ) ;;
+    sql: ${_date}
+      || '|' || ${account_id}
+      || '|' ||  ${campaign_id}
+      || '|' ||  ${adset_id}
+      || '|' ||  ${ad_id}
+      || '|' ||  ${breakdown};;
   }
 }
 
@@ -100,9 +99,7 @@ view: age_and_gender_base_fb_adapter {
 
   dimension: breakdown {
     hidden: yes
-    sql: concat(${age}
-      ,"|", ${gender_raw}
-    ) ;;
+    sql: ${age} || '|' ||  ${gender_raw};;
   }
   dimension: age {
     type: string
@@ -147,7 +144,7 @@ explore: ad_impressions_age_and_gender_fb_adapter {
     sql_on: ${fact.ad_id} = ${actions.ad_id} AND
       ${fact._date} = ${actions._date} AND
       ${fact.breakdown} = ${actions.breakdown} AND
-      ${actions.action_type}  = "offsite_conversion";;
+      ${actions.action_type}  = 'offsite_conversion';;
     relationship: one_to_one
   }
 }
@@ -189,7 +186,7 @@ explore: ad_impressions_hour_fb_adapter {
     sql_on: ${fact.ad_id} = ${actions.ad_id} AND
       ${fact._date} = ${actions._date} AND
       ${fact.breakdown} = ${actions.breakdown} AND
-      ${actions.action_type}  = "offsite_conversion";;
+      ${actions.action_type}  = 'offsite_conversion';;
     relationship: one_to_one
   }
 }
@@ -204,10 +201,9 @@ view: platform_and_device_base_fb_adapter {
 
   dimension: breakdown {
     hidden: yes
-    sql: concat(${impression_device}
-      ,"|", ${platform_position_raw}
-      ,"|", ${publisher_platform_raw}
-    ) ;;
+    sql: ${impression_device}
+      || '|' || ${platform_position_raw}
+      || '|' || ${publisher_platform_raw};;
   }
 
   dimension: impression_device {
@@ -330,7 +326,7 @@ explore: ad_impressions_platform_and_device_fb_adapter {
     sql_on: ${fact.ad_id} = ${actions.ad_id} AND
       ${fact._date} = ${actions._date} AND
       ${fact.breakdown} = ${actions.breakdown} AND
-      ${actions.action_type}  = "offsite_conversion";;
+      ${actions.action_type}  = 'offsite_conversion';;
     relationship: one_to_one
   }
 }
@@ -345,9 +341,7 @@ view: region_base_fb_adapter {
 
   dimension: breakdown {
     hidden: yes
-    sql: concat(${country}
-      ,"|", ${region}
-    ) ;;
+    sql: ${country} || '|' ||  ${region};;
   }
 
   dimension: country {
@@ -362,7 +356,7 @@ view: region_base_fb_adapter {
   dimension: state {
     type: string
     map_layer_name: us_states
-    sql: if(${country} = "US", ${region}, null) ;;
+    sql: if(${country} = 'US', ${region}, null) ;;
   }
 }
 
@@ -379,7 +373,7 @@ explore: ad_impressions_geo_fb_adapter {
     sql_on: ${fact.ad_id} = ${actions.ad_id} AND
       ${fact._date} = ${actions._date} AND
       ${fact.breakdown} = ${actions.breakdown} AND
-      ${actions.action_type}  = "offsite_conversion";;
+      ${actions.action_type}  = 'offsite_conversion';;
     relationship: one_to_one
   }
 }
