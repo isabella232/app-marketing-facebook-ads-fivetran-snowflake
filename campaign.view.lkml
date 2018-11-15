@@ -16,19 +16,8 @@ explore: campaign_fb_adapter {
 
 view: campaign_fb_adapter {
   extends: [fivetran_base_fb_adapter, facebook_ads_config]
-  derived_table: {
-    sql:
-  (
-    SELECT campaign_history.* FROM `{{ campaign.facebook_ad_account_schema._sql }}.campaign_history` as campaign_history
-    INNER JOIN (
-      SELECT
-      id, max(_fivetran_synced) as max_fivetran_synced
-      FROM `{{ campaign.facebook_ad_account_schema._sql }}.campaign_history`
-      GROUP BY id) max_campaign_history
-    ON max_campaign_history.id = campaign_history.id
-    AND max_campaign_history.max_fivetran_synced = campaign_history._fivetran_synced
-  ) ;;
-  }
+  sql_table_name: {{ campaign.facebook_ads_schema._sql }}.campaign ;;
+
 
   dimension: id {
     hidden: yes

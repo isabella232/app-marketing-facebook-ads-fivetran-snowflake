@@ -37,19 +37,7 @@ explore: adcreative_fb_adapter {
 
 view: adcreative_fb_adapter {
   extends: [fivetran_base_fb_adapter, facebook_ads_config]
-  derived_table: {
-    sql:
-      (
-        SELECT creative_history.* FROM `{{ ad.facebook_ad_account_schema._sql }}.ad_history` as creative_history
-        INNER JOIN (
-          SELECT
-          id, max(_fivetran_synced) as max_fivetran_synced
-          FROM `{{ ad.facebook_ad_account_schema._sql }}.creative_history`
-          GROUP BY id) max_creative_history
-        ON max_ad_history.id = creative_history.id
-        AND max_ad_history.max_fivetran_synced = creative_history._fivetran_synced
-      ) ;;
-  }
+  sql_table_name: {{ ad.facebook_ad_account_schema._sql }}.adcreative;;
 
   dimension: id {
     hidden: yes

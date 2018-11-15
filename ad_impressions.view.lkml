@@ -52,7 +52,7 @@ explore: ad_impressions_base_fb_adapter {
     sql_on: ${fact.ad_id} = ${actions.ad_id} AND
       ${fact._date} = ${actions._date} AND
       ${fact.breakdown} = ${actions.breakdown} AND
-      ${actions.action_type}  = "offsite_conversion";;
+      ${actions.action_type}  = 'offsite_conversion';;
     relationship: one_to_one
   }
 }
