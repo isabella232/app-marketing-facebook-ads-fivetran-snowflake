@@ -23,19 +23,8 @@ explore: adset_fb_adapter {
 
 view: adset_fb_adapter {
   extends: [fivetran_base_fb_adapter, facebook_ads_config]
-  derived_table: {
-    sql:
-  (
-    SELECT ad_set_history.* FROM `{{ adset.facebook_ad_account_schema._sql }}.ad_set_history` as ad_set_history
-    INNER JOIN (
-      SELECT
-      id, max(_fivetran_synced) as max_fivetran_synced
-      FROM `{{ adset.facebook_ad_account_schema._sql }}.ad_set_history`
-      GROUP BY id) max_ad_set_history
-    ON max_ad_set_history.id = ad_set_history.id
-    AND max_ad_set_history.max_fivetran_synced = ad_set_history._fivetran_synced
-  ) ;;
-  }
+  sql_table_name: {{ adset.facebook_ads_schema._sql }}.adset ;;
+
 
   dimension: id {
     hidden: yes
