@@ -33,7 +33,7 @@ view: ad_fb_adapter {
   sql_table_name: {{ ad.facebook_ads_schema._sql }}.ad ;;
 
   dimension: id {
-    hidden: no
+    hidden: yes
     sql: TO_CHAR(${TABLE}.id) ;;
   }
 
