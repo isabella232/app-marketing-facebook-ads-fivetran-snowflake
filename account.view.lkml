@@ -8,7 +8,7 @@ explore: account_fb_adapter {
 
 view: account_fb_adapter {
   extends: [fivetran_base_fb_adapter, facebook_ads_config]
-  sql_table_name: {{ account.facebook_ads_schema._sql }}.account ;;
+  sql_table_name: {{ account.facebook_ads_schema._sql }}.account_history ;;
 
   dimension: id {
     hidden: yes
