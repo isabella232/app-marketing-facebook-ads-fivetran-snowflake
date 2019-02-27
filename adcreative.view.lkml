@@ -37,7 +37,7 @@ explore: adcreative_fb_adapter {
 
 view: adcreative_fb_adapter {
   extends: [fivetran_base_fb_adapter, facebook_ads_config]
-  sql_table_name: {{ ad.facebook_ad_account_schema._sql }}.adcreative;;
+  sql_table_name: {{ ad.facebook_ad_account_schema._sql }}.creative_history;;
 
   dimension: id {
     hidden: yes
