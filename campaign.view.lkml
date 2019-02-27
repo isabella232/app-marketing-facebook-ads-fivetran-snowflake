@@ -16,7 +16,7 @@ explore: campaign_fb_adapter {
 
 view: campaign_fb_adapter {
   extends: [fivetran_base_fb_adapter, facebook_ads_config]
-  sql_table_name: {{ campaign.facebook_ads_schema._sql }}.campaign ;;
+  sql_table_name: {{ campaign.facebook_ads_schema._sql }}.campaign_history ;;
 
 
   dimension: id {
